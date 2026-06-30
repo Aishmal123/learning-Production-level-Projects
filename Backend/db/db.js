@@ -1,7 +1,13 @@
 import mongoose from 'mongoose'
+import express from 'express'
+const app=express()
 const connnectDb=async()=>{
     try {
        const connection=await mongoose.connect(process.env.MONGO_URI);
+       app.on("error",(error)=>{
+        console.log("Errr",error)
+        throw error
+       })
         console.log("db connected successfully")
     } catch (error) {
         console.log("error",error)
